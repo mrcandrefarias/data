@@ -1,0 +1,3 @@
+import loadDados
+
+loadDados.carregar()
