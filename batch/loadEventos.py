@@ -15,7 +15,7 @@ def carregar():
     db = mongoRepository.get_db()
     for evento in dados['events']:
         ids = evento['url'].split('__')
-        evento['_id'] = ids[1]
+        evento['_id'] = int(ids[1])
         evento['start_date'] = datetime.strptime(evento['start_date'],'%Y-%m-%dT%H:%M:%S+00:00' )
         evento['weekday'] = evento['start_date'].strftime("%A")
         carregarDetalhes(evento)
