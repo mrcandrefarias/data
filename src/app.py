@@ -1,3 +1,3 @@
-import loadDados
+import loadEventos
 
-loadDados.carregar()
+loadEventos.carregar()

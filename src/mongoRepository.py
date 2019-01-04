@@ -12,11 +12,7 @@ def get_db():
     db     = client['eventos']
     return db
 
-def savarDados(eventos):
-    db = get_db()
-    for evento in eventos:
-        print(evento)
-        print(":")
-        db.evento.save(evento)
+def savarDados(db, evento):
+    db.evento.save(evento)
         
     
