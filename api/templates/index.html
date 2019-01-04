@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<h2>Cidades com maiores volumes de eventos</h2>
+<p>Query: db.evento.aggregate([{"$match": {"location.city": { "$exists": 1}}}, {"$group": {"_id":"$location.city", "count":{"$sum":1}}}, {"$sort": {"count":-1} },{"$limit":5}])</p>
+<ul>
+{% for cidade in dados['cidades'] %}
+  <li>{{cidade['_id']}}:{{cidade['count']}}</li>
+{% endfor %}
+</ul>
+
+
+<h2>Quantidade Média de lotes por evento</h2>
+<p>Query: db.evento.aggregate([{"$group":{"_id": "id", "media": { "$avg": "$qtd_tickets" }}}])</p>
+{% for media in dados['media_lotes'] %}
+  {{media['media']}}
+{% endfor %}
+
+
+<h2>Frequência de eventos por dia da semana</h2>
+<p>Query: db.evento.aggregate([{"$group": {"_id":"$weekday", "count":{"$sum":1}}}, {"$sort": {"count":-1} }])</p>
+<ul>
+{% for dia in dados['dias'] %}
+  <li>{{dia['_id']}} {{dia['count']}}</li>
+{% endfor %}
+</ul>
+
+<h2>Quantidade de Eventos Online</h2>
+<p>Query: db.evento.find({ 'event_type' : "ONLINE" }).count() </p>
+{{dados['eventos_online']}} 
+
+<h2>Ingresso de maior valor</h2>
+<p>Query: db.evento.aggregate([{$group:{_id: "id", maxValue: { $max: "$max_valor_ticket" } }}]) </p>
+{% for valor in dados['maior_valor_ingresso'] %}
+  {{valor['maxValue']}}
+{% endfor %}
+
+<h2>Quantidade de Eventos com link para evento no Facebook</h2>
+<p>Query: db.evento.find({"face_event_link": { "$exists": 1}}).count() </p>
+{{dados['face_event_link']}} 
+
+
+</body>
+</html>
