@@ -45,7 +45,7 @@ def getValorMaximo():
 
 def getEventosLinkFace():
     db = mongoRepository.get_db()
-    return db.evento.find({"face_event_link": { "$exists": 1}}).count()
+    return db.evento.find({"face_event_link": { "$exists": 1, "$ne": None}}).count()
     
     
 

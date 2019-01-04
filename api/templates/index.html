@@ -39,7 +39,7 @@
 {% endfor %}
 
 <h2>Quantidade de Eventos com link para evento no Facebook</h2>
-<p>Query: db.evento.find({"face_event_link": { "$exists": 1}}).count() </p>
+<p>Query: db.evento.find({"face_event_link": { "$exists": 1, "$ne":null}}).count() </p>
 {{dados['face_event_link']}} 
 
 

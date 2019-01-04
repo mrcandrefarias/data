@@ -3,10 +3,17 @@ import  htmlParser
 import json
 import mongoRepository
 from datetime import datetime
-BASE_URL = 'https://www.sympla.com.br/eventos?ordem=data&pagina=1'
+BASE_URL = 'https://www.sympla.com.br/eventos?ordem=data&pagina='
 
-def carregar():
-    resp = requests.get(BASE_URL)
+def buscar():
+    for x in range(1, 100):
+        url = BASE_URL + str(x)
+        print(url)
+        carregar(url) 
+    
+
+def carregar(url):
+    resp = requests.get(url)
 
     json_data = htmlParser.parserEventos(resp.text)
 
@@ -23,14 +30,13 @@ def carregar():
 
 
 def carregarDetalhes(evento):
-    print ("carregando url:" + evento['url'])
+    #print ("carregando url:" + evento['url'])
     resp = requests.get(evento['url'])
     detalhes = htmlParser.parserDetalhesEventos(resp.text)
     evento['valor_tickets'] = detalhes['valor_tickets']
     evento['max_valor_ticket'] = max(detalhes['valor_tickets'])
     evento['qtd_tickets'] = detalhes['qtd_tickets']
     evento['face_event_link'] = detalhes['face_event_link']
-    
-    
+
 
 
