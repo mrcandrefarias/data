@@ -1,3 +1,0 @@
-import loadEventos
-
-loadEventos.carregar()
