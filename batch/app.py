@@ -6,3 +6,4 @@ if __name__ == '__main__':
     # dados ja foi iniciado
     #sleep(30)
     loadEventos.buscarEventos()
+    loadEventos.carregarDetalhesEventos()
