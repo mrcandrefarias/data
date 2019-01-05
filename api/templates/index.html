@@ -15,9 +15,7 @@
 
 <h2>Quantidade Média de lotes por evento</h2>
 <p>Query: db.evento.aggregate([{"$group":{"_id": "id", "media": { "$avg": "$qtd_tickets" }}}])</p>
-{% for media in dados['media_lotes'] %}
-  {{media['media']}}
-{% endfor %}
+{{dados['media_lotes']}}
 
 
 <h2>Frequência de eventos por dia da semana</h2>
@@ -34,9 +32,7 @@
 
 <h2>Ingresso de maior valor</h2>
 <p>Query: db.evento.aggregate([{$group:{_id: "id", maxValue: { $max: "$max_valor_ticket" } }}]) </p>
-{% for valor in dados['maior_valor_ingresso'] %}
-  {{valor['maxValue']}}
-{% endfor %}
+{{dados['maior_valor_ingresso']}}
 
 <h2>Quantidade de Eventos com link para evento no Facebook</h2>
 <p>Query: db.evento.find({"face_event_link": { "$exists": 1, "$ne":null}}).count() </p>
