@@ -13,8 +13,7 @@ BASE_URL = 'https://www.sympla.com.br/eventos?ordem=data&pagina='
         Conexão à base de dados bh-osm (MongoClient)
 '''
 def get_db():    
-    #client = MongoClient('mongo:27017')
-    client = MongoClient('localhost:27017')
+    client = MongoClient('mongo:27017')
     db     = client['sympla']
     return db
 

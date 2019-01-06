@@ -8,8 +8,7 @@ from pymongo import MongoClient
         Conexão à base de dados sympla (MongoClient)
 '''
 def get_db():
-    #client = MongoClient('mongo:27017')
-    client = MongoClient('localhost:27017')
+    client = MongoClient('mongo:27017')
     db     = client['sympla']
     return db
 
