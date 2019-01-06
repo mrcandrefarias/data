@@ -1,5 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from  html.parser import HTMLParser
 import re
+
+'''
+    Classe para parser o html de eventos.
+    Utiliza a biblioteca HTMLParser 
+    https://docs.python.org/3/library/html.parser.html
+'''
 class HTMLParserEventos(HTMLParser):
     eventos = ""
     def handle_data(self, data):
@@ -8,11 +16,27 @@ class HTMLParserEventos(HTMLParser):
             eventos = data[1]
             self.eventos = eventos[0:-1]
 
+'''
+    Realiza o parser da lista de eventos.
+    Parameters
+        ----------
+        html : str
+            Uma string html contendo a lista eventos 
+    Returns:
+        str
+        Uma string json contendo a lista de eventos da pagina
+            
+'''
 def parserEventos(html):
     parser = HTMLParserEventos()
     parser.feed(html)
     return parser.eventos
 
+'''
+    Classe para parser o html de informações complementares do evento.
+    Utiliza a biblioteca HTMLParser 
+    https://docs.python.org/3/library/html.parser.html
+'''
 class HTMLParserDetalhesEventos(HTMLParser):
     tickets = []
     lastTag = None
@@ -35,7 +59,21 @@ class HTMLParserDetalhesEventos(HTMLParser):
                 if ticket > 0:
                     self.tickets.append(ticket)
             
-
+'''
+    Realiza o parser de informações complementares do evento.
+    Parameters
+        ----------
+        html : str
+            Uma string html contendo as informações complementares de um evento 
+    Returns:
+        dictionary
+            As informações complementares de um evento
+            ex: {
+        'qtd_tickets': 1, 
+        'valor_tickets': [0.0], 
+        'face_event_link' : None
+        }
+'''
 def parserDetalhesEventos(html):
     parser = HTMLParserDetalhesEventos()
     parser.tickets = []
@@ -46,4 +84,8 @@ def parserDetalhesEventos(html):
     if len(parser.tickets) == 0:
         parser.tickets.append(0)
     
-    return {'qtd_tickets': len(parser.tickets), 'valor_tickets': parser.tickets, 'face_event_link' :  parser.face_event_link}
+    return {
+        'qtd_tickets': len(parser.tickets), 
+        'valor_tickets': parser.tickets, 
+        'face_event_link' :  parser.face_event_link
+        }
