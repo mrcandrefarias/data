@@ -1,7 +1,11 @@
 version: "3"
 services:
-  app:
-    build: ./src
   mongo:
     image: mongo
     restart: always
+  api:
+    build: ./api
+    ports:
+      - "80:80"
+  batch:
+    build: ./batch

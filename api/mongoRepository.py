@@ -117,6 +117,7 @@ def getEventosLinkFace():
 def getEvento(id):
     db = get_db()
     evento = db.evento.find_one({"_id": id})
-    evento['start_date'] = None
-    print (evento)
+    if evento != None:
+        evento['start_date'] = evento['start_date'].isoformat() 
+    
     return evento
